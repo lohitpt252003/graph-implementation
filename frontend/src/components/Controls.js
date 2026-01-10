@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 
 const Controls = ({ onAddCity, onAddEdge, onRunDijkstra, onRunAllPaths, onClearPath }) => {
     const [cityName, setCityName] = useState('');
-    const [cityX, setCityX] = useState(100);
-    const [cityY, setCityY] = useState(100);
     const [edgeFrom, setEdgeFrom] = useState('');
     const [edgeTo, setEdgeTo] = useState('');
     const [edgeWeight, setEdgeWeight] = useState(1);
@@ -12,7 +10,9 @@ const Controls = ({ onAddCity, onAddEdge, onRunDijkstra, onRunAllPaths, onClearP
 
     const handleAddCity = () => {
         if (cityName) {
-            onAddCity(cityName, parseInt(cityX), parseInt(cityY));
+            const randomX = Math.floor(Math.random() * 700) + 50;
+            const randomY = Math.floor(Math.random() * 500) + 50;
+            onAddCity(cityName, randomX, randomY);
             setCityName('');
         }
     };
@@ -32,21 +32,19 @@ const Controls = ({ onAddCity, onAddEdge, onRunDijkstra, onRunAllPaths, onClearP
 
             <div style={{ marginBottom: '20px' }}>
                 <h4>Add City</h4>
-                <input placeholder="Name (e.g. A)" value={cityName} onChange={e => setCityName(e.target.value)} />
+                <input placeholder="Name" value={cityName} onChange={e => setCityName(e.target.value)} />
                 <br />
-                <input type="number" placeholder="X" value={cityX} onChange={e => setCityX(e.target.value)} style={{ width: '60px' }} />
-                <input type="number" placeholder="Y" value={cityY} onChange={e => setCityY(e.target.value)} style={{ width: '60px' }} />
-                <br />
-                <button onClick={handleAddCity}>Add City</button>
+                <button onClick={handleAddCity} style={{ marginTop: '5px' }}>Add City</button>
             </div>
 
             <div style={{ marginBottom: '20px' }}>
                 <h4>Add Edge</h4>
                 <input placeholder="From" value={edgeFrom} onChange={e => setEdgeFrom(e.target.value)} style={{ width: '80px' }} />
                 <input placeholder="To" value={edgeTo} onChange={e => setEdgeTo(e.target.value)} style={{ width: '80px' }} />
-                <input type="number" placeholder="Weight" value={edgeWeight} onChange={e => setEdgeWeight(e.target.value)} style={{ width: '60px' }} />
-                <br />
-                <button onClick={handleAddEdge}>Add Edge</button>
+                <div style={{ marginTop: '5px' }}>
+                    <label>Weight: <input type="number" placeholder="Weight" value={edgeWeight} onChange={e => setEdgeWeight(e.target.value)} style={{ width: '60px' }} /></label>
+                </div>
+                <button onClick={handleAddEdge} style={{ marginTop: '5px' }}>Add Edge</button>
             </div>
 
             <div style={{ marginBottom: '20px' }}>
@@ -54,11 +52,11 @@ const Controls = ({ onAddCity, onAddEdge, onRunDijkstra, onRunAllPaths, onClearP
                 <input placeholder="Start" value={startNode} onChange={e => setStartNode(e.target.value)} style={{ width: '80px' }} />
                 <input placeholder="End" value={endNode} onChange={e => setEndNode(e.target.value)} style={{ width: '80px' }} />
                 <br />
-                <button onClick={() => onRunDijkstra(startNode, endNode)}>Shortest Path (Dijkstra)</button>
+                <button onClick={() => onRunDijkstra(startNode, endNode)} style={{ marginTop: '5px' }}>Shortest Path (Dijkstra)</button>
                 <br />
-                <button onClick={() => onRunAllPaths(startNode, endNode)}>All Paths</button>
+                <button onClick={() => onRunAllPaths(startNode, endNode)} style={{ marginTop: '5px' }}>All Paths</button>
                 <br />
-                <button onClick={onClearPath}>Clear Path</button>
+                <button onClick={onClearPath} style={{ marginTop: '5px' }}>Clear Path</button>
             </div>
         </div>
     );

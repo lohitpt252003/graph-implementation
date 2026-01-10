@@ -11,21 +11,9 @@ function App() {
   const [refresh, setRefresh] = useState(0); // To force re-render on graph updates
 
   // Initialize with some data for demo
+  // Initialize with empty graph
   useEffect(() => {
-    const g = new Graph();
-    g.addCity('A', 100, 300);
-    g.addCity('B', 300, 100);
-    g.addCity('C', 300, 500);
-    g.addCity('D', 500, 300);
-
-    g.addEdge('A', 'B', 4);
-    g.addEdge('A', 'C', 2);
-    g.addEdge('B', 'C', 5);
-    g.addEdge('B', 'D', 10);
-    g.addEdge('C', 'D', 3);
-
-    setGraph(g);
-    setRefresh(prev => prev + 1);
+    setGraph(new Graph());
   }, []);
 
   const handleAddCity = (name, x, y) => {
