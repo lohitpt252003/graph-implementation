@@ -18,12 +18,15 @@ const Controls = ({ onAddCity, onAddEdge, onRunDijkstra, onRunAllPaths, onClearP
     };
 
     const handleAddEdge = () => {
-        if (edgeFrom && edgeTo && edgeWeight) {
-            onAddEdge(edgeFrom, edgeTo, parseInt(edgeWeight), isDirected);
+        const weight = parseInt(edgeWeight);
+        if (edgeFrom && edgeTo && weight > 0) {
+            onAddEdge(edgeFrom, edgeTo, weight, isDirected);
             setEdgeFrom('');
             setEdgeTo('');
             setEdgeWeight(1);
             setIsDirected(true);
+        } else if (weight <= 0) {
+            alert("Weight must be a positive number!");
         }
     };
 

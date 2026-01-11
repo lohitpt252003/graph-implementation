@@ -3,6 +3,7 @@ import './App.css';
 import Graph from './utils/Graph';
 import GraphCanvas from './components/GraphCanvas';
 import Controls from './components/Controls';
+import HowToUse from './components/HowToUse';
 
 function App() {
   const [graph, setGraph] = useState(new Graph());
@@ -11,6 +12,7 @@ function App() {
   const [refresh, setRefresh] = useState(0); // To force re-render on graph updates
   const [cityName, setCityName] = useState(''); // Lifted state
   const [theme, setTheme] = useState('light');
+  const [showHelp, setShowHelp] = useState(false);
 
   const toggleTheme = () => {
     setTheme(prev => prev === 'light' ? 'dark' : 'light');
@@ -106,7 +108,23 @@ function App() {
   return (
     <div className={`App ${theme}-theme`} style={{ display: 'flex', height: '100vh', backgroundColor: 'var(--bg-color)', color: 'var(--text-color)', overflow: 'hidden' }}>
       <div style={{ flex: 1, position: 'relative', display: 'flex', flexDirection: 'column' }}>
-        <div style={{ position: 'absolute', top: '20px', right: '20px', zIndex: 10 }}>
+        <div style={{ position: 'absolute', top: '20px', right: '20px', zIndex: 10, display: 'flex', gap: '10px' }}>
+          <button
+            onClick={() => setShowHelp(true)}
+            style={{
+              padding: '8px 16px',
+              borderRadius: '20px',
+              border: '1px solid var(--control-border)',
+              background: 'var(--control-bg)',
+              color: 'var(--text-color)',
+              cursor: 'pointer',
+              backdropFilter: 'blur(5px)',
+              boxShadow: '0 2px 8px var(--shadow-color)',
+              fontWeight: '500'
+            }}
+          >
+            ❓ Help
+          </button>
           <button
             onClick={toggleTheme}
             style={{
@@ -148,6 +166,8 @@ function App() {
             <strong>Status:</strong> {message}
           </div>
         )}
+
+        {showHelp && <HowToUse onClose={() => setShowHelp(false)} />}
       </div>
 
       <Controls
