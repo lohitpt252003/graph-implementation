@@ -10,6 +10,11 @@ function App() {
   const [message, setMessage] = useState('');
   const [refresh, setRefresh] = useState(0); // To force re-render on graph updates
   const [cityName, setCityName] = useState(''); // Lifted state
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+  };
 
   // Initialize with some data for demo
   // Initialize with empty graph
@@ -99,11 +104,14 @@ function App() {
   };
 
   return (
-    <div className="App" style={{ display: 'flex' }}>
+    <div className={`App ${theme}-theme`} style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--bg-color)', color: 'var(--text-color)' }}>
       <div onClick={handleCanvasClick} style={{ display: 'inline-block' }}>
         <GraphCanvas graph={graph} path={path} onNodeClick={handleNodeClick} onNodeDrag={handleNodeDrag} />
       </div>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <button onClick={toggleTheme} style={{ margin: '10px', padding: '5px' }}>
+          Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode
+        </button>
         <Controls
           onAddCity={handleAddCity}
           onAddEdge={handleAddEdge}

@@ -38,17 +38,17 @@ const GraphCanvas = ({ graph, path, onNodeClick, onNodeDrag }) => {
         <svg
             width="800"
             height="600"
-            style={{ border: '1px solid #ccc', background: '#f9f9f9', cursor: draggingNode ? 'grabbing' : 'default' }}
+            style={{ border: '1px solid var(--control-border)', background: 'var(--canvas-bg)', cursor: draggingNode ? 'grabbing' : 'default' }}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
         >
             <defs>
                 <marker id="arrow" markerWidth="10" markerHeight="10" refX="28" refY="3" orient="auto" markerUnits="strokeWidth">
-                    <path d="M0,0 L0,6 L9,3 z" fill="#999" />
+                    <path d="M0,0 L0,6 L9,3 z" fill="var(--edge-color)" />
                 </marker>
                 <marker id="arrow-red" markerWidth="10" markerHeight="10" refX="28" refY="3" orient="auto" markerUnits="strokeWidth">
-                    <path d="M0,0 L0,6 L9,3 z" fill="red" />
+                    <path d="M0,0 L0,6 L9,3 z" fill="var(--highlight-color)" />
                 </marker>
             </defs>
 
@@ -126,14 +126,14 @@ const GraphCanvas = ({ graph, path, onNodeClick, onNodeDrag }) => {
                             <path
                                 d={d}
                                 fill="none"
-                                stroke={isPathEdge ? 'red' : '#999'}
+                                stroke={isPathEdge ? 'var(--highlight-color)' : 'var(--edge-color)'}
                                 strokeWidth={isPathEdge ? 3 : 1}
                                 markerEnd={isPathEdge ? 'url(#arrow-red)' : 'url(#arrow)'}
                             />
                             <text
                                 x={labelX}
                                 y={labelY}
-                                fill="blue"
+                                fill="var(--text-color)"
                                 fontSize="12"
                                 dy="-5"
                             >
@@ -159,11 +159,11 @@ const GraphCanvas = ({ graph, path, onNodeClick, onNodeDrag }) => {
                             cx={x}
                             cy={y}
                             r="20"
-                            fill={isSelected ? '#ffcc00' : '#fff'}
-                            stroke="#333"
+                            fill={isSelected ? 'var(--selected-node)' : 'var(--node-bg)'}
+                            stroke="var(--node-stroke)"
                             strokeWidth="2"
                         />
-                        <text x={x} y={y} dy="5" textAnchor="middle" fontSize="14" fontWeight="bold" style={{ userSelect: 'none' }}>
+                        <text x={x} y={y} dy="5" textAnchor="middle" fontSize="14" fontWeight="bold" style={{ userSelect: 'none', fill: 'var(--text-color)' }}>
                             {cityName}
                         </text>
                     </g>

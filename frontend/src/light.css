@@ -1,0 +1,14 @@
+.light-theme {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --canvas-bg: #f9f9f9;
+  --node-bg: #ffffff;
+  --node-stroke: #333333;
+  --edge-color: #999999;
+  --highlight-color: red;
+  --selected-node: #ffcc00;
+  --control-bg: #ffffff;
+  --control-border: #ccc;
+  --button-bg: #efefef;
+  --button-text: #000000;
+}

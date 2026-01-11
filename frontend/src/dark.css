@@ -1,0 +1,14 @@
+.dark-theme {
+    --bg-color: #1e1e1e;
+    --text-color: #ffffff;
+    --canvas-bg: #2d2d2d;
+    --node-bg: #333333;
+    --node-stroke: #ffffff;
+    --edge-color: #aaaaaa;
+    --highlight-color: #ff4444;
+    --selected-node: #ffcc00;
+    --control-bg: #252526;
+    --control-border: #444;
+    --button-bg: #3e3e42;
+    --button-text: #ffffff;
+}
