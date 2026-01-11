@@ -1,14 +1,30 @@
 .light-theme {
-  --bg-color: #ffffff;
-  --text-color: #000000;
-  --canvas-bg: #f9f9f9;
+  /* Backgrounds */
+  --bg-color: #f0f2f5;
+  --canvas-bg: #ffffff;
+  --control-bg: rgba(255, 255, 255, 0.8);
+
+  /* Text */
+  --text-color: #1a1a1a;
+  --text-secondary: #666666;
+
+  /* Borders */
+  --control-border: #e4e6eb;
+
+  /* Graph Elements */
   --node-bg: #ffffff;
-  --node-stroke: #333333;
-  --edge-color: #999999;
-  --highlight-color: red;
-  --selected-node: #ffcc00;
-  --control-bg: #ffffff;
-  --control-border: #ccc;
-  --button-bg: #efefef;
-  --button-text: #000000;
+  --node-stroke: #1a1a1a;
+  --edge-color: #b0b3b8;
+  --highlight-color: #007bff;
+  /* Vibrant Blue */
+  --selected-node: #ffc107;
+  /* Amber */
+
+  /* UI Elements */
+  --button-bg: #ffffff;
+  --button-text: #1a1a1a;
+  --button-hover: #f2f2f2;
+  --accent-color: #007bff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.5);
 }

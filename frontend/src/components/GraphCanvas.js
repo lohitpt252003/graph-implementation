@@ -36,14 +36,17 @@ const GraphCanvas = ({ graph, path, onNodeClick, onNodeDrag }) => {
 
     return (
         <svg
-            width="800"
-            height="600"
-            style={{ border: '1px solid var(--control-border)', background: 'var(--canvas-bg)', cursor: draggingNode ? 'grabbing' : 'default' }}
+            width="100%"
+            height="100%"
+            style={{ background: 'var(--canvas-bg)', cursor: draggingNode ? 'grabbing' : 'default' }}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
         >
             <defs>
+                <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="var(--control-border)" strokeWidth="1" opacity="0.5" />
+                </pattern>
                 <marker id="arrow" markerWidth="10" markerHeight="10" refX="28" refY="3" orient="auto" markerUnits="strokeWidth">
                     <path d="M0,0 L0,6 L9,3 z" fill="var(--edge-color)" />
                 </marker>
@@ -51,6 +54,7 @@ const GraphCanvas = ({ graph, path, onNodeClick, onNodeDrag }) => {
                     <path d="M0,0 L0,6 L9,3 z" fill="var(--highlight-color)" />
                 </marker>
             </defs>
+            <rect width="100%" height="100%" fill="url(#grid)" />
 
             {/* Draw Edges */}
             {Object.keys(adjacencyList).map((city) => {

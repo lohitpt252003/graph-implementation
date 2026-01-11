@@ -104,28 +104,61 @@ function App() {
   };
 
   return (
-    <div className={`App ${theme}-theme`} style={{ display: 'flex', minHeight: '100vh', backgroundColor: 'var(--bg-color)', color: 'var(--text-color)' }}>
-      <div onClick={handleCanvasClick} style={{ display: 'inline-block' }}>
-        <GraphCanvas graph={graph} path={path} onNodeClick={handleNodeClick} onNodeDrag={handleNodeDrag} />
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column' }}>
-        <button onClick={toggleTheme} style={{ margin: '10px', padding: '5px' }}>
-          Switch to {theme === 'light' ? 'Dark' : 'Light'} Mode
-        </button>
-        <Controls
-          onAddCity={handleAddCity}
-          onAddEdge={handleAddEdge}
-          onRunDijkstra={handleRunDijkstra}
-          onRunAllPaths={handleRunAllPaths}
-          onClearPath={handleClearPath}
-          cityName={cityName}
-          setCityName={setCityName}
-        />
-        <div style={{ padding: '20px', whiteSpace: 'pre-wrap' }}>
-          <h4>Status/Output:</h4>
-          {message}
+    <div className={`App ${theme}-theme`} style={{ display: 'flex', height: '100vh', backgroundColor: 'var(--bg-color)', color: 'var(--text-color)', overflow: 'hidden' }}>
+      <div style={{ flex: 1, position: 'relative', display: 'flex', flexDirection: 'column' }}>
+        <div style={{ position: 'absolute', top: '20px', right: '20px', zIndex: 10 }}>
+          <button
+            onClick={toggleTheme}
+            style={{
+              padding: '8px 16px',
+              borderRadius: '20px',
+              border: '1px solid var(--control-border)',
+              background: 'var(--control-bg)',
+              color: 'var(--text-color)',
+              cursor: 'pointer',
+              backdropFilter: 'blur(5px)',
+              boxShadow: '0 2px 8px var(--shadow-color)',
+              fontWeight: '500'
+            }}
+          >
+            {theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}
+          </button>
         </div>
+
+        <div onClick={handleCanvasClick} style={{ flex: 1, overflow: 'hidden' }}>
+          <GraphCanvas graph={graph} path={path} onNodeClick={handleNodeClick} onNodeDrag={handleNodeDrag} />
+        </div>
+
+        {message && (
+          <div style={{
+            position: 'absolute',
+            bottom: '20px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            padding: '12px 24px',
+            borderRadius: '8px',
+            background: 'var(--control-bg)',
+            color: 'var(--text-color)',
+            border: '1px solid var(--control-border)',
+            backdropFilter: 'blur(5px)',
+            boxShadow: '0 4px 12px var(--shadow-color)',
+            maxWidth: '80%',
+            textAlign: 'center'
+          }}>
+            <strong>Status:</strong> {message}
+          </div>
+        )}
       </div>
+
+      <Controls
+        onAddCity={handleAddCity}
+        onAddEdge={handleAddEdge}
+        onRunDijkstra={handleRunDijkstra}
+        onRunAllPaths={handleRunAllPaths}
+        onClearPath={handleClearPath}
+        cityName={cityName}
+        setCityName={setCityName}
+      />
     </div>
   );
 }

@@ -1,14 +1,30 @@
 .dark-theme {
-    --bg-color: #1e1e1e;
-    --text-color: #ffffff;
-    --canvas-bg: #2d2d2d;
-    --node-bg: #333333;
-    --node-stroke: #ffffff;
-    --edge-color: #aaaaaa;
-    --highlight-color: #ff4444;
-    --selected-node: #ffcc00;
-    --control-bg: #252526;
-    --control-border: #444;
-    --button-bg: #3e3e42;
-    --button-text: #ffffff;
+    /* Backgrounds */
+    --bg-color: #121212;
+    --canvas-bg: #1e1e1e;
+    --control-bg: rgba(30, 30, 30, 0.8);
+
+    /* Text */
+    --text-color: #e4e6eb;
+    --text-secondary: #b0b3b8;
+
+    /* Borders */
+    --control-border: #2d2d2d;
+
+    /* Graph Elements */
+    --node-bg: #2d2d2d;
+    --node-stroke: #e4e6eb;
+    --edge-color: #4a4a4a;
+    --highlight-color: #bb86fc;
+    /* Neon Purple */
+    --selected-node: #03dac6;
+    /* Teal */
+
+    /* UI Elements */
+    --button-bg: #2d2d2d;
+    --button-text: #e4e6eb;
+    --button-hover: #3a3a3a;
+    --accent-color: #bb86fc;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --glass-border: rgba(255, 255, 255, 0.1);
 }
