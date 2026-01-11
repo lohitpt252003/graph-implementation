@@ -32,11 +32,20 @@ class Graph {
     return false; // City already exists
   }
 
-  addEdge(city1, city2, weight) {
+  updateCityPosition(name, x, y) {
+    if (this.cities[name]) {
+      this.cities[name] = { x, y };
+      return true;
+    }
+    return false;
+  }
+
+  addEdge(city1, city2, weight, isDirected = true) {
     if (this.adjacencyList[city1] && this.adjacencyList[city2]) {
       this.adjacencyList[city1].push({ node: city2, weight });
-      // For undirected graph, uncomment the next line
-      // this.adjacencyList[city2].push({ node: city1, weight });
+      if (!isDirected) {
+        this.adjacencyList[city2].push({ node: city1, weight });
+      }
       return true;
     }
     return false;

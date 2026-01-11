@@ -9,6 +9,7 @@ function App() {
   const [path, setPath] = useState(null);
   const [message, setMessage] = useState('');
   const [refresh, setRefresh] = useState(0); // To force re-render on graph updates
+  const [cityName, setCityName] = useState(''); // Lifted state
 
   // Initialize with some data for demo
   // Initialize with empty graph
@@ -20,13 +21,43 @@ function App() {
     if (graph.addCity(name, x, y)) {
       setRefresh(prev => prev + 1);
       setMessage(`City ${name} added.`);
+      return true;
     } else {
       setMessage(`City ${name} already exists.`);
+      return false;
     }
   };
 
-  const handleAddEdge = (from, to, weight) => {
-    if (graph.addEdge(from, to, weight)) {
+  const handleCanvasClick = (e) => {
+    // Calculate coordinates relative to the SVG
+    const rect = e.target.getBoundingClientRect();
+    const x = Math.floor(e.clientX - rect.left);
+    const y = Math.floor(e.clientY - rect.top);
+
+    let nameToAdd = cityName;
+    if (!nameToAdd) {
+      // Auto-generate name if empty
+      const existing = Object.keys(graph.cities).length;
+      nameToAdd = String.fromCharCode(65 + existing); // A, B, C...
+      if (graph.cities[nameToAdd]) {
+        // Fallback if collision
+        nameToAdd = `Node${existing + 1}`;
+      }
+    }
+
+    if (handleAddCity(nameToAdd, x, y)) {
+      setCityName(''); // Clear input after successful add
+    }
+  };
+
+  const handleNodeDrag = (name, x, y) => {
+    if (graph.updateCityPosition(name, x, y)) {
+      setRefresh(prev => prev + 1);
+    }
+  };
+
+  const handleAddEdge = (from, to, weight, isDirected) => {
+    if (graph.addEdge(from, to, weight, isDirected)) {
       setRefresh(prev => prev + 1);
       setMessage(`Edge ${from}-${to} added.`);
     } else {
@@ -69,7 +100,9 @@ function App() {
 
   return (
     <div className="App" style={{ display: 'flex' }}>
-      <GraphCanvas graph={graph} path={path} onNodeClick={handleNodeClick} />
+      <div onClick={handleCanvasClick} style={{ display: 'inline-block' }}>
+        <GraphCanvas graph={graph} path={path} onNodeClick={handleNodeClick} onNodeDrag={handleNodeDrag} />
+      </div>
       <div style={{ display: 'flex', flexDirection: 'column' }}>
         <Controls
           onAddCity={handleAddCity}
@@ -77,6 +110,8 @@ function App() {
           onRunDijkstra={handleRunDijkstra}
           onRunAllPaths={handleRunAllPaths}
           onClearPath={handleClearPath}
+          cityName={cityName}
+          setCityName={setCityName}
         />
         <div style={{ padding: '20px', whiteSpace: 'pre-wrap' }}>
           <h4>Status/Output:</h4>

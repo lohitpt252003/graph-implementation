@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-const Controls = ({ onAddCity, onAddEdge, onRunDijkstra, onRunAllPaths, onClearPath }) => {
-    const [cityName, setCityName] = useState('');
+const Controls = ({ onAddCity, onAddEdge, onRunDijkstra, onRunAllPaths, onClearPath, cityName, setCityName }) => {
     const [edgeFrom, setEdgeFrom] = useState('');
     const [edgeTo, setEdgeTo] = useState('');
     const [edgeWeight, setEdgeWeight] = useState(1);
+    const [isDirected, setIsDirected] = useState(true);
     const [startNode, setStartNode] = useState('');
     const [endNode, setEndNode] = useState('');
 
@@ -19,10 +19,11 @@ const Controls = ({ onAddCity, onAddEdge, onRunDijkstra, onRunAllPaths, onClearP
 
     const handleAddEdge = () => {
         if (edgeFrom && edgeTo && edgeWeight) {
-            onAddEdge(edgeFrom, edgeTo, parseInt(edgeWeight));
+            onAddEdge(edgeFrom, edgeTo, parseInt(edgeWeight), isDirected);
             setEdgeFrom('');
             setEdgeTo('');
             setEdgeWeight(1);
+            setIsDirected(true);
         }
     };
 
@@ -43,6 +44,9 @@ const Controls = ({ onAddCity, onAddEdge, onRunDijkstra, onRunAllPaths, onClearP
                 <input placeholder="To" value={edgeTo} onChange={e => setEdgeTo(e.target.value)} style={{ width: '80px' }} />
                 <div style={{ marginTop: '5px' }}>
                     <label>Weight: <input type="number" placeholder="Weight" value={edgeWeight} onChange={e => setEdgeWeight(e.target.value)} style={{ width: '60px' }} /></label>
+                    <label style={{ marginLeft: '10px' }}>
+                        <input type="checkbox" checked={isDirected} onChange={e => setIsDirected(e.target.checked)} /> Directed
+                    </label>
                 </div>
                 <button onClick={handleAddEdge} style={{ marginTop: '5px' }}>Add Edge</button>
             </div>
