@@ -101,7 +101,7 @@ const Controls = ({ onAddCity, onAddEdge, onRunDijkstra, onRunAllPaths, onClearP
 
     return (
         <div style={containerStyle}>
-            <h2 style={{ margin: '0 0 10px 0', fontSize: '24px', fontWeight: '700' }}>Graph Viz</h2>
+            <h2 style={{ margin: '0 0 10px 0', fontSize: '24px', fontWeight: '700' }}>Graph Master</h2>
 
             <div style={sectionStyle}>
                 <h4 style={headingStyle}>Add City</h4>

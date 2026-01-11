@@ -11,11 +11,24 @@ function App() {
   const [message, setMessage] = useState('');
   const [refresh, setRefresh] = useState(0); // To force re-render on graph updates
   const [cityName, setCityName] = useState(''); // Lifted state
-  const [theme, setTheme] = useState('light');
+
+  // Initialize theme from localStorage or system preference
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      return savedTheme;
+    }
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  });
+
   const [showHelp, setShowHelp] = useState(false);
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    setTheme(prev => {
+      const newTheme = prev === 'light' ? 'dark' : 'light';
+      localStorage.setItem('theme', newTheme);
+      return newTheme;
+    });
   };
 
   // Initialize with some data for demo
